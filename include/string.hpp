@@ -6,145 +6,213 @@
 #include <cstddef>
 #include <iostream>
 
-class String {
- public:
-  /// Деструктор
-  ~String();
-
-  /// Конструктор по умолчанию
-  String();
-
-  /// Конструктор копирования
-  /// <param name="rhs">Объект, который копируем </param>
-  String(const String& rhs);
-
-  /// Пользовательский конструктор
-  /// <param name="data">Данные, которые требуется поместить в создаваемый
-  /// объект </param>
-  String(const char* data);
-
-  /// Оператор присваивания
-  /// <param name="data">Объект, который копируем </param>
-  /// <returns>Возвращаем ссылку на себя</returns>
-  String& operator=(const String& rhs);
-
-  /// Оператор +=
-  /// <param name="rhs">Объект, который стоит после знака '+=' </param>
-  /// <returns>Возвращаем ссылку на себя</returns>
-  String& operator+=(const String& rhs);
-
-  /// Оператор *=
-  /// <returns>Возвращаем ссылку на себя</returns>
-  String& operator*=(unsigned int m);
-
-  /// Оператор ==
-  /// <param name="rhs">Объект, который стоит после знака '==' </param>
-  /// <returns>Возвращаем значения равенства двух строк</returns>
-  bool operator==(const String& rhs) const;
-
-  /// Оператор &lt;
-  /// <param name="rhs">Объект, который стоит после знака "&lt;" </param>
-  /// <returns>Возвращаем значения сравнения двух строк</returns>
-  bool operator<(const String& rhs) const;
-
-  /// Функция поиска подстроки
-  /// <param name="substr">Подстрока, которую необходимо найти </param>
-  /// <returns>Возвращаем позицию substr. Если подстрока не найдена, то
-  /// возвратить -1</returns>
-  size_t Find(const String& substr) const;
-
-  /// Функция замены символов, заменяет все символы oldSymbol на newSymbol.
-  /// <param name="oldSymbol">Символ, который требуется заменить </param>
-  /// <param name="newSymbol">Символ, на который требуется заменить </param>
-  void Replace(char oldSymbol, char newSymbol);
-
-  /// Функция возвращает длину строки
-  /// <returns>Возвращаем длину строки</returns>
-  size_t Size() const;
-
-  /// Функция для определения пуста ли строка
-  bool Empty() const;
-
-  /// Оператор []
-  /// <example>
-  /// <code>
-  /// String str = "some string";
-  /// char symbol = str[2]; // symbol == 'm'
-  /// </code>
-  /// </example>
-  /// <param name="index"> Индекс символа </param>
-  /// <returns> Значение символа в строке с индексом index</returns>
-  char operator[](size_t index) const;
-
-  /// Оператор []
-  /// <example>
-  /// <code>
-  /// String str = "some string";
-  /// str[0] = 'S'; // теперь переменная str равна "Some string"
-  /// </code>
-  /// </example>
-  /// <param name="index"> Индекс символа </param>
-  /// <returns> Ссылка на символ в строке с индексом index</returns>
-  char& operator[](size_t index);
-
-  /// Смотри пример
-  /// <example>
-  /// <code>
-  /// String str = "___some string___";
-  /// str.RTrim('_'); // теперь переменная str равна "___some string"
-  /// </code>
-  /// </example>
-  /// <param name="symbol"> Значение символов, которе отрезаем </param>
-  void RTrim(char symbol);
-
-  /// Смотри пример
-  /// <example>
-  /// <code>
-  /// String str = "___some string___";
-  /// str.LTrim('_'); // теперь переменная str равна "some string___"
-  /// </code>
-  /// </example>
-  /// <param name="symbol"> Значение символов, которе отрезаем </param>
-  void LTrim(char symbol);
-
-  void swap(String& oth);
-
-  friend std::ostream& operator<<(std::ostream&, const String&);
-
- private:
-  char* Data;
+class String
+{
+	char* ptr;
+public:
+	~String() {
+		delete []ptr;;
+	}
+	String() {
+		ptr = nullptr;
+	}
+	String(const String& str) {
+		size_t len = str.Size();
+		ptr = new char[len+1];
+		ptr[len] = '\0';
+		delete []ptr;
+		for (size_t i = 0; i < len; i++) {
+			ptr[i] = str.ptr[i];
+		}
+	}
+	String(const char* data) {
+		ptr = new char[strlen(data)+1];
+		ptr[strlen(data)] = '\0';
+		for (size_t i = 0; ptr[i] !='\0'; i++) {
+			ptr[i] = data[i];
+		}
+	}
+	String& operator=(const String& str) {
+		size_t len = str.Size();
+		delete[]ptr;
+		char* ps = new char[len+1];
+		ps[len] = '\0';
+		for (size_t i = 0; i < len; i++) {
+			ps[i] = str.ptr[i];
+		}
+		ptr = ps;
+		return *this;
+	}
+	String& operator+=(const String& str) {
+		char* newstr = new char[this->Size() + str.Size() + 1];
+		newstr[this->Size() + str.Size()] = '\0';
+		for (size_t i = 0; i < this->Size(); i++) {
+			newstr[i] = ptr[i];
+		}
+		for (size_t i = this->Size(), j = 0; i < this->Size() + str.Size(); i++, j++) {
+			newstr[i] = str.ptr[j];
+		}
+		delete[]ptr;
+		ptr = newstr;
+		return *this;
+	}
+	String& operator*=(unsigned int m) {
+		char* ps = new char[this->Size() * m + 1];
+		ps[this->Size() * m] = '\0';
+		for (size_t i = 0, j = 0; i < this->Size() * m; i++, j++) {
+			if (j == this->Size()) j = 0;
+			ps[i] = ptr[j];
+		}
+		delete[]ptr;
+		ptr = ps;
+		return *this;
+	}
+	bool operator==(String& str) {
+		int count = 0;
+		if (this->Size() == str.Size()) {
+			for (size_t i = 0; i < this->Size(); i++) {
+				if (ptr[i] == str.ptr[i]) count++;
+			}
+			if (count == this->Size()) return true;
+			else return false;
+		}
+		else return false;
+	}
+	size_t Find(const String& str) const {
+		size_t count = 0, key = -1;
+		if (this->Size() < str.Size()) return -1;
+		for (size_t i = 0, j = 0; i < this->Size(); i++, j++) {
+			if (ptr[i] != str.ptr[j]) {
+				count = j = 0;
+				key = -1;
+			} else {
+				count++;
+				if (key == -1) key = i;
+			}
+			if (count == str.Size()) return key;
+		}
+		if (count == 0) return -1;
+	}
+	void Replace(char oldSymbol, char newSymbol) {
+		for (size_t i = 0; i < this->Size(); i++) {
+			if (ptr[i] == oldSymbol) ptr[i] = newSymbol;
+		}
+	}
+	size_t Size() const {
+		size_t count = 0;
+		for (size_t i = 0; ptr[i] != '\0'; i++) {
+			count++;
+		}
+		return count;
+	}
+	bool Empty() {
+		if (this->Size() == 0) return true;
+	}
+	char operator[](size_t index) const {
+		return ptr[index];
+	}
+	char& operator[](size_t index) {
+		return ptr[index];
+	}
+	void RTrim(char symbol) {
+		int count = 0;
+		for (size_t i = this->Size(); i > -1; i--) {
+			if (ptr[i] == symbol) count++;
+			else i = -1;
+		}
+		char* ps = new char[this->Size() - count + 1];
+		ps[this->Size() - count] = '\0';
+		for (size_t i = 0; i < this->Size() - count; i++) {
+			ps[i] = ptr[i];
+		}
+		delete[]ptr;
+		ptr = ps;
+	}
+	void LTrim(char symbol) {
+		size_t count = 0;
+		for (size_t i = 0; i < this->Size(); i++) {
+			if (ptr[i] == symbol) count++;
+			else i = this->Size();
+		}
+		char* ps = new char[this->Size() - count + 1];
+		ps[this->Size() - count] = '\0';
+		for (size_t i = 0, j = count; i < this->Size() - count; i++, j++) {
+			ps[i] = ptr[j];
+		}
+		delete[]ptr;
+		ptr = ps;
+	}
+	void swap(String& oth) {
+		char* ps1 = new char[oth.Size() + 1]; 
+		char* ps2 = new char[this->Size() + 1];
+		size_t buf = 0;
+		ps1[oth.Size()] = '\0';
+		ps2[this->Size()] = '\0';
+		for (size_t i = 0; i < oth.Size(); i++) {
+			ps1[i] = oth.ptr[i];
+		}
+		for (size_t i = 0; i < this->Size(); i++) {
+			ps2[i] = ptr[i];
+		}
+		delete[]ptr;
+		delete[]oth.ptr;
+		ptr = ps1;
+		oth.ptr = ps2;
+	}
+	friend std::ostream& operator<<(std::ostream&, const String&);
+	friend String operator+(const String& a, const String& b);
+	friend String operator*(const String& a, unsigned int b);
+	friend bool operator!=(const String& a, const String& b);
+	friend bool operator>(const String& a, const String& b);
 };
+std::ostream& operator<<(std::ostream& out, const String& str) {
+	for (size_t i = 0; i < str.Size(); i++) {
+		out << str.ptr[i];
+	}
+	return out;
+}
 
-/// Оператор +
-/// <example>
-/// <code>
-/// String a = "Hello";
-/// String b = "World";
-/// String c = a + b; // c равна "HelloWorld"
-/// </code>
-/// </example>
-/// <returns>Возвращаем строку равную a + b</returns>
-String operator+(const String& a, const String& b);
+String operator+(const String& a, const String& b) {
+	char* ps = new char[a.Size() + b.Size() + 1];
+	ps[a.Size() + b.Size()] = '\0';
+	for (size_t i = 0; i < a.Size(); i++) {
+		ps[i] = a.ptr[i];
+	}
+	for (size_t i = a.Size(), j = 0; i < a.Size() + b.Size(); i++, j++) {
+		ps[i] = b.ptr[j];
+	}
+	String* str = new String(ps);
+	delete[]ps;
+	return *str;
+}
 
-/// Оператор +
-/// <example>
-/// <code>
-/// String a = "A";
-/// String c = a * 5; // c равна "AAAAA"
-/// </code>
-/// </example>
-String operator*(const String& a, unsigned int b);
+String operator*(const String& a, unsigned int b) {
+	char* ps = new char[a.Size() * b + 1];
+	ps[a.Size() * b] = '\0';
+	for (size_t i = 0, j = 0; i < (a.Size() * b); i++, j++) {
+		if (j == a.Size()) j = 0;
+		ps[i] = a.ptr[j];
+	}
+	String* str = new String(ps);
+	delete[]ps;
+	return *str;
+}
 
-/// Оператор !=
-bool operator!=(const String& a, const String& b);
+bool operator!=(const String& a, const String& b) {
+	size_t count = 0;
+	if (a.Size() != b.Size()) return true;
+	else {
+		for (size_t i = 0; i < a.Size(); i++) {
+			if (a.ptr[i] == b.ptr[i]) count++;
+		}
+		if (count == a.Size()) return false;
+		else return true;
+	}
+}
 
-/// Оператор &gt;
-bool operator>(const String& a, const String& b);
-
-/// Оператор вывода
-/// <param name="out">Поток куда выводим строку </param>
-/// <param name="str">Строка, которую выводим </param>
-/// <returns>Возвращаем ссылку на поток</returns>
-std::ostream& operator<<(std::ostream& out, const String& str);
+bool operator>(const String& a, const String& b) {
+	if (a.Size() > b.Size()) return true;
+	else return false;
+}
 
 #endif  // INCLUDE_STRING_HPP_
