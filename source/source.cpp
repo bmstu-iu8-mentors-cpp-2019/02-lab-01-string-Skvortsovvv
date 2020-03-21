@@ -151,7 +151,7 @@ size_t String::Find(const String& str) const {
             if (count == str.Size()) return key;
         }
     }
-    if (count == 0) return -1;
+    return -1;
 }
 
 void String::Replace(char oldSymbol, char newSymbol) {
