@@ -26,7 +26,7 @@ public:
     char& operator[](size_t index);
     void RTrim(char symbol);
     void LTrim(char symbol);
-    void swap(String& oth);
+    void Swap(String& oth);
     friend std::ostream& operator<<(std::ostream&, const String&);
     friend String operator+(const String& a, const String& b);
     friend String operator*(const String& a, unsigned int b);
