@@ -1,5 +1,6 @@
 // Copyright 2020 Skvortsov Vladimir <your_email>
 #include <string.hpp>
+#include <cstring>
 std::ostream& operator<<(std::ostream& out, const String& str) {
     for (size_t i = 0; i < str.Size(); i++) {
         out << str.ptr[i];
