@@ -117,6 +117,7 @@ String& String::operator*=(unsigned int m) {
     ptr = ps;
     return *this;
 }
+
 bool String::operator==(String& str) {
     size_t count = 0;
     if (this->Size() == str.Size()) {
@@ -132,9 +133,10 @@ bool String::operator==(String& str) {
        return false;
     }
 }
+
 size_t String::Find(const String& str) const {
-size_t count = 0;
-int key = -1;
+    size_t count = 0;
+    int key = -1;
     if (this->Size() < str.Size()) return -1;
     for (size_t i = 0, j = 0; i < this->Size(); i++, j++) {
         if (ptr[i] != str.ptr[j]) {
@@ -148,6 +150,7 @@ int key = -1;
     }
     if (count == 0) return -1;
 }
+
 void String::Replace(char oldSymbol, char newSymbol) {
     for (size_t i = 0; i < this->Size(); i++) {
         if (ptr[i] == oldSymbol) ptr[i] = newSymbol;
@@ -163,6 +166,7 @@ size_t String::Size() const {
 bool String::Empty() {
     if (this->Size() == 0) return true;
 }
+
 char String::operator[](size_t index) const {
     return ptr[index];
 }
