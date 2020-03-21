@@ -165,7 +165,8 @@ size_t String::Size() const {
 }
 bool String::Empty() {
     if (this->Size() == 0) return true;
-    else {
+    else
+    {
         return false;
     }
 }
