@@ -73,8 +73,9 @@ String::String(const String& str) {
     }
 }
 String::String(const char* data) {
-    ptr = new char[strlen(data) + 1];
-    ptr[strlen(data)] = '\0';
+    int len = strlen(data);
+    ptr = new char[len + 1];
+    ptr[len] = '\0';
     for (size_t i = 0; ptr[i] != '\0'; i++) {
         ptr[i] = data[i];
     }
@@ -116,7 +117,7 @@ String& String::operator*=(unsigned int m) {
     return *this;
 }
 bool String::operator==(String& str) {
-    int count = 0;
+    size_t count = 0;
     if (this->Size() == str.Size()) {
         for (size_t i = 0; i < this->Size(); i++) {
             if (ptr[i] == str.ptr[i]) count++;
