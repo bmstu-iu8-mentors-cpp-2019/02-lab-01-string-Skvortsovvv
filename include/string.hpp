@@ -13,7 +13,7 @@ public:
     ~String();
     String();
     String(const String& str);
-    String(const char* data);
+    explicit String(const char* data);
     String& operator=(const String& str);
     String& operator+=(const String& str);
     String& operator*=(unsigned int m);
