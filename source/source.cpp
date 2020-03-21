@@ -43,8 +43,7 @@ bool operator!=(const String& a, const String& b) {
         }
         if (count == a.Size()){
            return false;
-        } else
-        { 
+        } else {
            return true;
         }
     }
@@ -53,8 +52,7 @@ bool operator!=(const String& a, const String& b) {
 bool operator>(const String& a, const String& b) {
     if (a.Size() > b.Size()){
        return true;
-    } else
-    {
+    } else {
        return false;
     }
 }
@@ -124,9 +122,13 @@ bool String::operator==(String& str) {
             if (ptr[i] == str.ptr[i]) count++;
         }
         if (count == this->Size()) return true;
-        else return false;
+        else {
+           return false;
+        }
     }
-    else return false;
+    else {
+       return false;
+    }
 }
 size_t String::Find(const String& str) const {
 size_t count = 0;
@@ -136,8 +138,7 @@ int key = -1;
         if (ptr[i] != str.ptr[j]) {
             count = j = 0;
             key = -1;
-        } else 
-        {
+        } else {
             count++;
             if (key == -1) key = i;
         }
@@ -170,7 +171,9 @@ void String::RTrim(char symbol) {
     int count = 0;
     for (int i = this->Size(); i > -1; i--) {
         if (ptr[i] == symbol) count++;
-        else i = -1;
+        else{
+           i = -1;
+        }
     }
     char* ps = new char[this->Size() - count + 1];
     ps[this->Size() - count] = '\0';
@@ -184,7 +187,9 @@ void String::LTrim(char symbol) {
     size_t count = 0;
     for (size_t i = 0; i < this->Size(); i++) {
         if (ptr[i] == symbol) count++;
-        else i = this->Size();
+        else {
+           i = this->Size();
+        }
     }
     char* ps = new char[this->Size() - count + 1];
     ps[this->Size() - count] = '\0';
