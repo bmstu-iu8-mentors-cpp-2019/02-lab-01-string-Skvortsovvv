@@ -126,8 +126,7 @@ bool String::operator==(String& str) {
         {
            return false;
         }
-    } else
-    {
+    } else {
        return false;
     }
 }
