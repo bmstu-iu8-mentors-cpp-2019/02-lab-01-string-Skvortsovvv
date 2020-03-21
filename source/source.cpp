@@ -199,7 +199,7 @@ void String::LTrim(char symbol) {
     delete[]ptr;
     ptr = ps;
 }
-void String::swap(String& oth) {
+void String::Swap(String& oth) {
     char* ps1 = new char[oth.Size() + 1];
     char* ps2 = new char[this->Size() + 1];
     ps1[oth.Size()] = '\0';
