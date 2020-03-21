@@ -1,3 +1,4 @@
+// Copyright 2020 Skvortsov Vladimir <your_email>
 #include <string.hpp>
 std::ostream& operator<<(std::ostream& out, const String& str) {
     for (size_t i = 0; i < str.Size(); i++) {
@@ -35,18 +36,27 @@ String operator*(const String& a, unsigned int b) {
 bool operator!=(const String& a, const String& b) {
     size_t count = 0;
     if (a.Size() != b.Size()) return true;
-    else {
+    else
+    {
         for (size_t i = 0; i < a.Size(); i++) {
             if (a.ptr[i] == b.ptr[i]) count++;
         }
-        if (count == a.Size()) return false;
-        else return true;
+        if (count == a.Size()){
+           return false;
+        } else
+        { 
+           return true;
+        }
     }
 }
 
 bool operator>(const String& a, const String& b) {
-    if (a.Size() > b.Size()) return true;
-    else return false;
+    if (a.Size() > b.Size()){
+       return true;
+    } else
+    {
+       return false;
+    }
 }
 
 String::~String() {
@@ -88,7 +98,8 @@ String& String::operator+=(const String& str) {
     for (size_t i = 0; i < this->Size(); i++) {
         newstr[i] = ptr[i];
     }
-    for (size_t i = this->Size(), j = 0; i < this->Size() + str.Size(); i++, j++) {
+    for (size_t i = this->Size(), j = 0;
+         i < this->Size() + str.Size(); i++, j++) {
         newstr[i] = str.ptr[j];
     }
     delete[]ptr;
@@ -125,8 +136,8 @@ int key = -1;
         if (ptr[i] != str.ptr[j]) {
             count = j = 0;
             key = -1;
-        }
-        else {
+        } else 
+        {
             count++;
             if (key == -1) key = i;
         }
