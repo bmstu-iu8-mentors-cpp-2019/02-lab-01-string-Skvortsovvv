@@ -165,6 +165,9 @@ size_t String::Size() const {
 }
 bool String::Empty() {
     if (this->Size() == 0) return true;
+    else {
+        return false;
+    }
 }
 
 char String::operator[](size_t index) const {
