@@ -138,15 +138,18 @@ size_t String::Find(const String& str) const {
     size_t count = 0;
     int key = -1;
     if (this->Size() < str.Size()) return -1;
-    for (size_t i = 0, j = 0; i < this->Size(); i++, j++) {
-        if (ptr[i] != str.ptr[j]) {
-            count = j = 0;
-            key = -1;
-        } else {
-            count++;
-            if (key == -1) key = i;
+    else
+    {
+        for (size_t i = 0, j = 0; i < this->Size(); i++, j++) {
+            if (ptr[i] != str.ptr[j]) {
+                count = j = 0;
+                key = -1;
+            } else {
+                count++;
+                if (key == -1) key = i;
+            }
+            if (count == str.Size()) return key;
         }
-        if (count == str.Size()) return key;
     }
     if (count == 0) return -1;
 }
