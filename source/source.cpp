@@ -122,11 +122,12 @@ bool String::operator==(String& str) {
             if (ptr[i] == str.ptr[i]) count++;
         }
         if (count == this->Size()) return true;
-        else {
+        else
+        {
            return false;
         }
-    }
-    else {
+    } else
+    {
        return false;
     }
 }
@@ -171,7 +172,8 @@ void String::RTrim(char symbol) {
     int count = 0;
     for (int i = this->Size(); i > -1; i--) {
         if (ptr[i] == symbol) count++;
-        else{
+        else
+        {
            i = -1;
         }
     }
@@ -187,7 +189,8 @@ void String::LTrim(char symbol) {
     size_t count = 0;
     for (size_t i = 0; i < this->Size(); i++) {
         if (ptr[i] == symbol) count++;
-        else {
+        else
+        {
            i = this->Size();
         }
     }
