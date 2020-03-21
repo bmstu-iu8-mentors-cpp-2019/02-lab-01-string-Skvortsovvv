@@ -118,84 +118,84 @@ bool String::operator==(String& str) {
     else return false;
 }
 size_t String::Find(const String& str) const {
-	size_t count = 0, key = -1;
-	if (this->Size() < str.Size()) return -1;
-	for (size_t i = 0, j = 0; i < this->Size(); i++, j++) {
-		if (ptr[i] != str.ptr[j]) {
-			count = j = 0;
-			key = -1;
-		}
-		else {
-			count++;
-			if (key == -1) key = i;
-		}
-		if (count == str.Size()) return key;
-	}
-	if (count == 0) return -1;
+size_t count = 0;
+int key = -1;
+    if (this->Size() < str.Size()) return -1;
+    for (size_t i = 0, j = 0; i < this->Size(); i++, j++) {
+        if (ptr[i] != str.ptr[j]) {
+            count = j = 0;
+            key = -1;
+        }
+        else {
+            count++;
+            if (key == -1) key = i;
+        }
+        if (count == str.Size()) return key;
+    }
+    if (count == 0) return -1;
 }
 void String::Replace(char oldSymbol, char newSymbol) {
-	for (size_t i = 0; i < this->Size(); i++) {
-		if (ptr[i] == oldSymbol) ptr[i] = newSymbol;
-	}
+    for (size_t i = 0; i < this->Size(); i++) {
+        if (ptr[i] == oldSymbol) ptr[i] = newSymbol;
+    }
 }
 size_t String::Size() const {
-	size_t count = 0;
-	for (size_t i = 0; ptr[i] != '\0'; i++) {
-		count++;
-	}
-	return count;
+    size_t count = 0;
+    for (size_t i = 0; ptr[i] != '\0'; i++) {
+        count++;
+    }
+    return count;
 }
 bool String::Empty() {
-	if (this->Size() == 0) return true;
+    if (this->Size() == 0) return true;
 }
 char String::operator[](size_t index) const {
-	return ptr[index];
+    return ptr[index];
 }
 char& String::operator[](size_t index) {
-	return ptr[index];
+    return ptr[index];
 }
 void String::RTrim(char symbol) {
-	int count = 0;
-	for (size_t i = this->Size(); i > -1; i--) {
-		if (ptr[i] == symbol) count++;
-		else i = -1;
-	}
-	char* ps = new char[this->Size() - count + 1];
-	ps[this->Size() - count] = '\0';
-	for (size_t i = 0; i < this->Size() - count; i++) {
-		ps[i] = ptr[i];
-	}
-	delete[]ptr;
-	ptr = ps;
+    int count = 0;
+    for (int i = this->Size(); i > -1; i--) {
+        if (ptr[i] == symbol) count++;
+        else i = -1;
+    }
+    char* ps = new char[this->Size() - count + 1];
+    ps[this->Size() - count] = '\0';
+    for (size_t i = 0; i < this->Size() - count; i++) {
+        ps[i] = ptr[i];
+    }
+    delete[]ptr;
+    ptr = ps;
 }
 void String::LTrim(char symbol) {
-	size_t count = 0;
-	for (size_t i = 0; i < this->Size(); i++) {
-		if (ptr[i] == symbol) count++;
-		else i = this->Size();
-	}
-	char* ps = new char[this->Size() - count + 1];
-	ps[this->Size() - count] = '\0';
-	for (size_t i = 0, j = count; i < this->Size() - count; i++, j++) {
-		ps[i] = ptr[j];
-	}
-	delete[]ptr;
-	ptr = ps;
+    size_t count = 0;
+    for (size_t i = 0; i < this->Size(); i++) {
+        if (ptr[i] == symbol) count++;
+        else i = this->Size();
+    }
+    char* ps = new char[this->Size() - count + 1];
+    ps[this->Size() - count] = '\0';
+    for (size_t i = 0, j = count; i < this->Size() - count; i++, j++) {
+        ps[i] = ptr[j];
+    }
+    delete[]ptr;
+    ptr = ps;
 }
 void String::swap(String& oth) {
-	char* ps1 = new char[oth.Size() + 1];
-	char* ps2 = new char[this->Size() + 1];
-	size_t buf = 0;
-	ps1[oth.Size()] = '\0';
-	ps2[this->Size()] = '\0';
-	for (size_t i = 0; i < oth.Size(); i++) {
-		ps1[i] = oth.ptr[i];
-	}
-	for (size_t i = 0; i < this->Size(); i++) {
-		ps2[i] = ptr[i];
-	}
-	delete[]ptr;
-	delete[]oth.ptr;
-	ptr = ps1;
-	oth.ptr = ps2;
+    char* ps1 = new char[oth.Size() + 1];
+    char* ps2 = new char[this->Size() + 1];
+    ps1[oth.Size()] = '\0';
+    ps2[this->Size()] = '\0';
+    for (size_t i = 0; i < oth.Size(); i++) {
+        ps1[i] = oth.ptr[i];
+    }
+    for (size_t i = 0; i < this->Size(); i++) {
+        ps2[i] = ptr[i];
+    }
+    delete[]ptr;
+    delete[]oth.ptr;
+    ptr = ps1;
+    oth.ptr = ps2;
 }
