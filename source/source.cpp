@@ -244,3 +244,18 @@ bool String::operator==(const char* str) const {
     }
     return false;
 }
+
+String& String::operator+=(const char* str) {
+    char* ps = new char[this->Size() + strlen(str) + 1];
+    ps[this->Size() + strlen(str)] = '\0';
+    for (size_t i = 0; i < this->Size(); i++) {
+        ps[i] = this->ptr[i];
+    }
+    for (size_t i = this->Size(), j = 0;
+         i < this->Size() + strlen(str); i++, j++) {
+        ps[i] = str[j];
+    }
+    delete[]ptr;
+    ptr = ps;
+    return *this;
+}
