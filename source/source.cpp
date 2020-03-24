@@ -280,3 +280,14 @@ size_t String::Find(const char* str) const {
     }
     return -1;
 }
+
+bool operator==(const char* rhs, const String& str) {
+    if (strlen(rhs) == str.Size()) {
+        size_t count = 0;
+        for (size_t i = 0; i < strlen(rhs); i++) {
+            if (rhs[i] == str.ptr[i]) count++;
+        }
+        if (count == str.Size()) return true;
+    }
+    return false;
+}
