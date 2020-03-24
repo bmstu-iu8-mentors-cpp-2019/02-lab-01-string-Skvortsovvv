@@ -167,7 +167,7 @@ size_t String::Size() const {
     return count;
 }
 bool String::Empty() {
-    if (this->Size() == 0) return true;
+    if (ptr == nullptr) return true;
     else
     {
         return false;
