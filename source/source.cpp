@@ -233,15 +233,15 @@ void String::Swap(String& oth) {
 }
 
 bool String::operator==(const char* str) const {
-	if (this->Size() == strlen(str)) {
-		size_t count = 0;
-		for (size_t i = 0; i < this->Size(); i++) {
-			if (ptr[i] == str[i]) {
-				count++;
-			}
-		}
-		if (count == this->Size()) return true;
-	} else {
-		return false;
-	}
+    if (this->Size() == strlen(str)) {
+        size_t count = 0;
+        for (size_t i = 0; i < this->Size(); i++) {
+            if (ptr[i] == str[i]) {
+                count++;
+            }
+        }
+        if (count == this->Size()) return true;
+    } else {
+        return false;
+    }
 }
