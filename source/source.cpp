@@ -66,8 +66,8 @@ String::String() {
 }
 String::String(const String& str) {
     size_t len = str.Size();
-    ptr = new char[len + 1];
-    ptr[len] = '\0';
+    ptr = new char[len];
+    //ptr[len] = '\0';
     delete[]ptr;
     for (size_t i = 0; i < len; i++) {
         ptr[i] = str.ptr[i];
