@@ -17,6 +17,7 @@ public:
     explicit String(const char* data);
     String& operator=(const String& str);
     String& operator+=(const String& str);
+    String& operator+=(const char* str);
     String& operator*=(unsigned int m);
     bool operator==(const char* rhs) const;
     bool operator==(const String& str) const;
