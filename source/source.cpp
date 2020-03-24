@@ -118,7 +118,7 @@ String& String::operator*=(unsigned int m) {
     return *this;
 }
 
-bool String::operator==(String& str) {
+bool String::operator==(const String& str) const {
     size_t count = 0;
     if (this->Size() == str.Size()) {
         for (size_t i = 0; i < this->Size(); i++) {
