@@ -135,17 +135,18 @@ bool String::operator==(String& str) {
 }
 
 size_t String::Find(const String& str) const {
-    size_t count = 0;
+    size_t count = 0, size = this->Size(), j = 0;
     int key = -1;
-    if (this->Size() < str.Size()) return -1;
+    if (size < str.Size()) return -1;
     else
     {
-        for (size_t i = 0, j = 0; i < this->Size(); i++, j++) {
+        for (size_t i = 0; i < size; i++) {
             if (ptr[i] != str.ptr[j]) {
                 count = j = 0;
                 key = -1;
             } else {
                 count++;
+                j++;
                 if (key == -1) key = i;
             }
             if (count == str.Size()) return key;
