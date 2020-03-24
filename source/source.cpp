@@ -118,7 +118,7 @@ String& String::operator*=(unsigned int m) {
     return *this;
 }
 
-bool operator==(const String& str) const {
+bool String::operator==(const String& str) const {
     size_t count = 0;
     if (this->Size() == str.Size()) {
         for (size_t i = 0; i < this->Size(); i++) {
@@ -232,7 +232,7 @@ void String::Swap(String& oth) {
     oth.ptr = ps2;
 }
 
-bool operator==(const char* str) const {
+bool String::operator==(const char* str) const {
     if (this->Size() == strlen(str)) {
         size_t count = 0;
         for (size_t i = 0; i < this->Size(); i++) {
