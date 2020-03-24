@@ -21,6 +21,7 @@ public:
     String& operator*=(unsigned int m);
     bool operator==(const char* rhs) const;
     bool operator==(const String& str) const;
+    friend bool operator==(const char* rhs, const String& str);
     size_t Find(const String& str) const;
     size_t Find(const char* str) const;
     void Replace(char oldSymbol, char newSymbol);
