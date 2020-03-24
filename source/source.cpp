@@ -241,7 +241,6 @@ bool String::operator==(const char* str) const {
             }
         }
         if (count == this->Size()) return true;
-    } else {
-        return false;
     }
+    return false;
 }
