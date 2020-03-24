@@ -270,8 +270,7 @@ size_t String::Find(const char* str) const {
             if (ptr[i] != str[j]) {
                 count = j = 0;
                 key = -1;
-            } else
-            {
+            } else {
                 count++;
                 j++;
                 if (key == -1) key = i;
