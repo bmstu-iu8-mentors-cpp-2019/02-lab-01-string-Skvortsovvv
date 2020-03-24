@@ -18,7 +18,8 @@ public:
     String& operator=(const String& str);
     String& operator+=(const String& str);
     String& operator*=(unsigned int m);
-    bool operator==(String& str);
+    bool operator==(const char* rhs) const;
+    bool operator==(const String& str) const;
     size_t Find(const String& str) const;
     void Replace(char oldSymbol, char newSymbol);
     size_t Size() const;
