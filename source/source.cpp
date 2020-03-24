@@ -261,23 +261,23 @@ String& String::operator+=(const char* str) {
 }
 
 size_t String::Find(const char* str) const {
-	size_t count = 0, j = 0, size = this->Size();
-	int key = -1;
-	if (size < strlen(str)) return -1;
-	else
-	{
-		for (size_t i = 0; i < size; i++) {
-			if (ptr[i] != str[j]) {
-				count = j = 0;
-				key = -1;
-			}
-			else {
-				count++;
-				j++;
-				if (key == -1) key = i;
-			}
-			if (count == size) return key;
-		}
-	}
-	return -1;
+    size_t count = 0, j = 0, size = this->Size();
+    int key = -1;
+    if (size < strlen(str)) return -1;
+    else
+    {
+        for (size_t i = 0; i < size; i++) {
+            if (ptr[i] != str[j]) {
+                count = j = 0;
+                key = -1;
+            }
+            else {
+                count++;
+                j++;
+                if (key == -1) key = i;
+            }
+            if (count == size) return key;
+        }
+    }
+    return -1;
 }
