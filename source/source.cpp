@@ -66,14 +66,11 @@ String::String() {
 }
 String::String(const String& str) {
     size_t len = str.Size();
-    char *ps = new char[len+1];
-    ps[len] = '\0';
-    delete[]ptr;
+    ptr = new char[len+1];
+    ptr[len] = '\0';
     for (size_t i = 0; i < len; i++) {
-        ps[i] = str.ptr[i];
+        ptr[i] = str.ptr[i];
     }
-    ptr = ps;
-    delete[]ps;
 }
 String::String(const char* data) {
     int len = strlen(data);
