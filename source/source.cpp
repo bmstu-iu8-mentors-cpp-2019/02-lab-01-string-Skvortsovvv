@@ -274,7 +274,7 @@ size_t String::Find(const char* str) const {
                 j++;
                 if (key == -1) key = i;
             }
-            if (count == size) return key;
+            if (count == strlen(str)) return key;
         }
     }
     return -1;
