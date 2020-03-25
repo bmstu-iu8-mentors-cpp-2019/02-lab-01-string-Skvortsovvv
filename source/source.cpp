@@ -17,9 +17,9 @@ String operator+(const String& a, const String& b) {
     for (size_t i = a.Size(), j = 0; i < a.Size() + b.Size(); i++, j++) {
         ps[i] = b.ptr[j];
     }
-    String* str = new String(ps);
+    String str(ps);
     delete[]ps;
-    return *str;
+    return str;
 }
 
 String operator*(const String& a, unsigned int b) {
