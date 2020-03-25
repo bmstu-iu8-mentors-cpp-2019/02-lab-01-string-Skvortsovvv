@@ -30,7 +30,7 @@ String operator*(const String& a, unsigned int b) {
         ps[i] = a.ptr[j];
     }
     String str(ps);
-    delete []ps
+    delete []ps;
     return str;
 }
 
