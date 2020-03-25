@@ -106,9 +106,9 @@ String& String::operator+=(const String& str) {
     return *this;
 }
 String& String::operator*=(unsigned int m) {
-    char* ps = new char[this->Size() * m + 1];
-    ps[this->Size() * m] = '\0';
-    for (size_t i = 0, j = 0; i < this->Size() * m; i++, j++) {
+    char* ps = new char[this->Size() * (m + 1) + 1];
+    ps[this->Size() * (m + 1)] = '\0';
+    for (size_t i = 0, j = 0; i < this->Size() * (m + 1); i++, j++) {
         if (j == this->Size()) j = 0;
         ps[i] = ptr[j];
     }
