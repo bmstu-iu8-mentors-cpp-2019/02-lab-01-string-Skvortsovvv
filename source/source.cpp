@@ -182,14 +182,14 @@ char& String::operator[](size_t index) {
 }
 void String::RTrim(char symbol) {
     int count = 0;
-    for (int i = this->Size(); i > -1; i--) {
+    for (int i = this->Size() - 1; i > -1; i--) {
         if (ptr[i] == symbol) count++;
         else
         {
            i = -1;
         }
     }
-    char* ps = new char[this->Size() - count + 1];
+    char* ps = new char[this->Size() + 1];
     ps[this->Size() - count] = '\0';
     for (size_t i = 0; i < this->Size() - count; i++) {
         ps[i] = ptr[i];
