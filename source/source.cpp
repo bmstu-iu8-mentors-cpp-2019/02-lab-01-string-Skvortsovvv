@@ -10,7 +10,7 @@ std::ostream& operator<<(std::ostream& out, const String& str) {
 
 String operator+(const String& a, const String& b) {
     char* ps = new char[a.Size() + b.Size() + 1];
-    ps[a.Size() + b.Size()] = '\0';
+    //ps[a.Size() + b.Size()] = '\0';
     for (size_t i = 0; i < a.Size(); i++) {
         ps[i] = a.ptr[i];
     }
