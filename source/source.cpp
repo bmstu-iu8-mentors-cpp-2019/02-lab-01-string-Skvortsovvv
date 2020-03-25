@@ -24,7 +24,7 @@ String operator+(const String& a, const String& b) {
 
 String operator*(const String& a, unsigned int b) {
     char* ps = new char[a.Size() * b + 1];
-    ps[a.Size() * b] = '\0';
+    //ps[a.Size() * b] = '\0';
     for (size_t i = 0, j = 0; i < (a.Size() * b); i++, j++) {
         if (j == a.Size()) j = 0;
         ps[i] = a.ptr[j];
