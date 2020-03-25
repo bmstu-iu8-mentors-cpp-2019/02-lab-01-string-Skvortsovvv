@@ -29,9 +29,9 @@ String operator*(const String& a, unsigned int b) {
         if (j == a.Size()) j = 0;
         ps[i] = a.ptr[j];
     }
-    String* str = new String(ps);
-    delete[]ps;
-    return *str;
+    String str(ps);
+    delete []ps
+    return str;
 }
 
 bool operator!=(const String& a, const String& b) {
