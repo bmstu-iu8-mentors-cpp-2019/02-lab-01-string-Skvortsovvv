@@ -72,14 +72,21 @@ String::String(const String& str) {
         ptr[i] = str.ptr[i];
     }
 }
-String::String(const char* data) {
-    int len = strlen(data);
-    ptr = new char[len + 1];
-    ptr[len] = '\0';
-    for (size_t i = 0; ptr[i] != '\0'; i++) {
-        ptr[i] = data[i];
-    }
-}
+//String::String(const char* data) {
+//    int len = strlen(data);
+//    ptr = new char[len + 1];
+//    ptr[len] = '\0';
+//    for (size_t i = 0; ptr[i] != '\0'; i++) {
+//        ptr[i] = data[i];
+//    }
+//}
+String::String(const char* data)
+{
+ size_t k = std::strlen(data);
+ ptr = new char[k+1];
+ std::copy(data, data + k, ptr);
+ ptr[k] = '\0';
+ }
 String& String::operator=(const String& str) {
     size_t len = str.Size();
     delete[]ptr;
